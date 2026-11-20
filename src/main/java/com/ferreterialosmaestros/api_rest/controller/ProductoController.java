@@ -1,0 +1,49 @@
+package com.ferreterialosmaestros.api_rest.controller;
+
+import com.ferreterialosmaestros.api_rest.model.Producto;
+import com.ferreterialosmaestros.api_rest.service.ProductoService;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/productos")
+public class ProductoController {
+
+    private final ProductoService service;
+
+    public ProductoController(ProductoService service) {
+        this.service = service;
+    }
+
+    @GetMapping
+    public List<Producto> listar() {
+        return service.listar();
+    }
+
+    @GetMapping("/{id}")
+    public Producto buscarPorId(@PathVariable Long id) {
+        return service.buscarPorId(id);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Producto guardar(@RequestBody Producto producto) {
+        return service.guardar(producto);
+    }
+
+    @PutMapping("/{id}")
+    public Producto actualizar(
+            @PathVariable Long id,
+            @RequestBody Producto producto) {
+        return service.actualizar(id, producto);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminar(@PathVariable Long id) {
+        service.eliminar(id);
+    }
+}
