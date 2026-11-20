@@ -7,9 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/productos")
+@RequestMapping("/api/v1/productos")
 public class ProductoController {
 
     private final ProductoService service;
@@ -28,19 +29,22 @@ public class ProductoController {
         return service.buscarPorId(id);
     }
 
+    @io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "jwt")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Producto guardar(@RequestBody Producto producto) {
+    public Producto guardar(@Valid @RequestBody Producto producto) {
         return service.guardar(producto);
     }
 
+    @io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "jwt")
     @PutMapping("/{id}")
     public Producto actualizar(
             @PathVariable Long id,
-            @RequestBody Producto producto) {
+            @Valid @RequestBody Producto producto) {
         return service.actualizar(id, producto);
     }
 
+    @io.swagger.v3.oas.annotations.security.SecurityRequirement(name = "jwt")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void eliminar(@PathVariable Long id) {
