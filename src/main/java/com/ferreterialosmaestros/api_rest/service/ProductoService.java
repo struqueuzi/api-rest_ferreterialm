@@ -3,6 +3,8 @@ package com.ferreterialosmaestros.api_rest.service;
 import com.ferreterialosmaestros.api_rest.model.Producto;
 import com.ferreterialosmaestros.api_rest.repository.ProductoRepository;
 
+import com.ferreterialosmaestros.api_rest.model.Categoria;
+import com.ferreterialosmaestros.api_rest.repository.CategoriaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -14,8 +16,11 @@ public class ProductoService {
 
     private final ProductoRepository repository;
 
-    public ProductoService(ProductoRepository repository) {
+    private final CategoriaRepository categorias;
+
+    public ProductoService(ProductoRepository repository, CategoriaRepository categorias) {
         this.repository = repository;
+        this.categorias = categorias;
     }
 
     // Listar todos los productos
@@ -35,24 +40,40 @@ public class ProductoService {
     }
 
     // Guardar un producto
+    @org.springframework.transaction.annotation.Transactional
     public Producto guardar(Producto producto) {
         producto.setId(null);
+        asegurarCategoria(producto.getCategoria());
         return repository.save(producto);
     }
 
     // Actualizar un producto
+    @org.springframework.transaction.annotation.Transactional
     public Producto actualizar(Long id, Producto datos) {
-        Producto producto = buscarPorId(id);
+        Producto producto = repository.bloquearPorId(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Producto no encontrado"));
 
         producto.setNombre(datos.getNombre());
         producto.setPrecio(datos.getPrecio());
+        producto.setStock(datos.getStock());
+        producto.setImagen(datos.getImagen());
+        asegurarCategoria(datos.getCategoria());
+        producto.setCategoria(datos.getCategoria());
+        producto.setSubcategoria(datos.getSubcategoria());
+        producto.setDescuento(datos.getDescuento());
+        producto.setEsNuevo(datos.getEsNuevo());
 
         return repository.save(producto);
     }
 
     // Eliminar un producto
+    @org.springframework.transaction.annotation.Transactional
     public void eliminar(Long id) {
-        Producto producto = buscarPorId(id);
+        Producto producto = repository.bloquearPorId(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Producto no encontrado"));
         repository.delete(producto);
+    }
+    private void asegurarCategoria(String nombre) {
+        categorias.save(new Categoria(nombre));
     }
 }

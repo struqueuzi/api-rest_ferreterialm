@@ -1,0 +1,54 @@
+[
+  {
+    "nombre": "Cemento Polpaico Especial 25kg",
+    "precio": 4890,
+    "stock": 120,
+    "imagen": "assets/imgs/cemento-especial-transex-25-kg-.jpg",
+    "categoria": "Materiales de construcción",
+    "subcategoria": "Cementos"
+  },
+  {
+    "nombre": "Rotomartillo Eléctrico 800W",
+    "precio": 45990,
+    "stock": 8,
+    "imagen": "assets/imgs/5fb962b131194-edb82be4-f66a-4c09-9089-ed06a679c1c4-1600x1600.jpg",
+    "categoria": "Herramientas eléctricas",
+    "subcategoria": "Rotomartillos",
+    "descuento": 20
+  },
+  {
+    "nombre": "Martillo de Carpintero 16oz",
+    "precio": 8990,
+    "stock": 14,
+    "imagen": "assets/imgs/martillo.jpg",
+    "categoria": "Herramientas manuales",
+    "subcategoria": "Martillos",
+    "descuento": 15
+  },
+  {
+    "nombre": "Tubo PVC Sanitario 40mm x 3mt",
+    "precio": 3290,
+    "stock": 45,
+    "imagen": "assets/imgs/tubo-pvc-u-para-alcantarillado-domiciliario-gris-3-metros.jpg",
+    "categoria": "Gasfitería",
+    "subcategoria": "Tuberías PVC",
+    "descuento": 10
+  },
+  {
+    "nombre": "Cemento Polpaico Alta Resistencia 25kg",
+    "precio": 5490,
+    "stock": 60,
+    "imagen": "assets/imgs/cemento.jpg",
+    "categoria": "Materiales de construcción",
+    "subcategoria": "Cementos"
+  },
+  {
+    "nombre": "Rotomartillo SDS Plus 800W 26mm",
+    "precio": 52990,
+    "stock": 5,
+    "imagen": "assets/imgs/rotomartillo-sds-plus-800w-26mm-shr263ka-b3.jpg",
+    "categoria": "Herramientas eléctricas",
+    "subcategoria": "Rotomartillos",
+    "esNuevo": true
+  }
+]
